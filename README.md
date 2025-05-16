@@ -11,7 +11,7 @@ This isn’t just a portfolio. It’s a command-line experience that lets you ex
 
 ---
 
-## :notepad_spiral:License
+## 🗒️ License
 
 This project is licensed under the CC BY-NC-ND 4.0 License — see the LICENSE file for details.
 
