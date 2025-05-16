@@ -363,6 +363,7 @@ const startupLoading = (interval, time) => {
         }
       }
 
+      isLoaded = true;
       terminalSystem();
     };
     clearInterval(spinner);
