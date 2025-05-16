@@ -23,6 +23,9 @@ let charIndex = 0;
 let audioEnabled = true;
 let isTyping = false;
 
+let currentStartupSound = null;
+let currentLoopSound = null;
+
 // ==========================
 // INITIALIZATION
 // ==========================
@@ -49,12 +52,17 @@ const loadMessages = () => {
 // CARET / INPUT / SOUND
 // ==========================
 
+const playSound = (sound, volume = 0.5, rate = 1.0) => {
+  if (!audioEnabled) return;
+  const s = sound.cloneNode();
+  s.volume = volume;
+  s.playbackRate = rate;
+  s.play();
+};
+
 const playTypingSound = () => {
-    if (!audioEnabled) return;
-    const sound = keySounds[Math.floor(Math.random() * keySounds.length)].cloneNode();
-    sound.volume = 0.8 + Math.random() * 0.2;
-    sound.playbackRate = 0.95 + Math.random() * 0.1;
-    sound.play();
+  const sound = keySounds[Math.floor(Math.random() * keySounds.length)];
+  playSound(sound, 0.8 + Math.random() * 0.2, 0.95 + Math.random() * 0.1);
 };
 
 const updateCaretPosition = () => {
@@ -200,7 +208,7 @@ const terminalSystem = () => {
     const line = introLines[lineIndex];
     if (charIndex < line.length) {
       terminal.textContent += line.charAt(charIndex++);
-      setTimeout(terminalSystem, 20);
+      setTimeout(terminalSystem, 15);
     } else {
       terminal.textContent += "\n";
       charIndex = 0;
@@ -223,7 +231,7 @@ const handleCommand = async cmdLine => {
     typeToTerminal("Pinging https://google.com ...\n", terminal);
     try {
       const start = performance.now();
-      await fetch("https://www.google.com", { mode: 'no-cors', cache: 'no-store' });
+      await fetch("https://httpbin.org/get", { cache: 'no-store' });
       const ping = Math.round(performance.now() - start);
       typeToTerminal(`Ping: ${ping} ms\n`, terminal);
     } catch {
@@ -232,10 +240,30 @@ const handleCommand = async cmdLine => {
   } else if (cmd === 'audio') {
     if (argStr === 'off') {
       audioEnabled = false;
+  
+      if (currentStartupSound) {
+        currentStartupSound.pause();
+        currentStartupSound.currentTime = 0;
+        currentStartupSound = null;
+      }
+  
+      if (currentLoopSound) {
+        currentLoopSound.pause();
+        currentLoopSound.currentTime = 0;
+        currentLoopSound = null;
+      }
+  
       typeToTerminal("Audio disabled.\n", terminal);
     } else if (argStr === 'on') {
       audioEnabled = true;
       typeToTerminal("Audio enabled.\n", terminal);
+
+      if (!currentLoopSound) {
+        currentLoopSound = terminalSounds[1].cloneNode(); 
+        currentLoopSound.volume = 0.5;
+        currentLoopSound.loop = true;
+        currentLoopSound.play();
+      }
     } else {
       typeToTerminal(commandsResponse[cmd], terminal);
     }
@@ -247,8 +275,8 @@ const handleCommand = async cmdLine => {
       return typeToTerminal(`Please enter correctly: arts <number>\nCurrently available: ${Object.keys(arts).length} arts.`, terminal);
     }
     if (arts[count]) {
-      typeToTerminal(`Displaying art #${count}:\n`, terminal);
-      arts[count].forEach(line => typeToTerminal(line, terminal));
+      const artLines = arts[count].join('\n');
+      typeToTerminal(artLines, terminal);
     } else {
       typeToTerminal(`No art found with number ${count}.`, terminal);
     }
@@ -256,7 +284,7 @@ const handleCommand = async cmdLine => {
     typeToTerminal(argStr ? `> ${argStr}\n` : "Usage: echo <text>\n", terminal);
   } else if (cmd === 'projects') {
     const key = args[0];
-    if (!key) typeToTerminal(commandsResponse[cmd], terminal);
+    if (!key) return typeToTerminal(commandsResponse[cmd], terminal);
     const project = commandsResponse.projectslist[key];
     if (!project) return typeToTerminal(`Project \"${key}\" not found.`, terminal);
     if (document.getElementById(`window-${key}`)) return typeToTerminal(`\"${key}\" is already open.`, terminal);
@@ -315,16 +343,22 @@ const startupLoading = (interval, time) => {
       requestAnimationFrame(() => screen.classList.add('fade-in'));
 
       if (audioEnabled) {
-        startupSound.volume = 0.5;
-        startupSound.play();
-        startupSound.onended = () => {
-          loopSound.volume = 0.5;
-          loopSound.play();
+        currentStartupSound = startupSound.cloneNode();
+        currentStartupSound.volume = 0.5;
+        currentStartupSound.play();
+      
+        currentStartupSound.onended = () => {
+          currentLoopSound = loopSound;
+          currentLoopSound.volume = 0.5;
+          currentLoopSound.loop = true;
+          currentLoopSound.play();
         };
       } else {
-        loopSound.pause();         
-        loopSound.currentTime = 0; 
-        loopSound.volume = 0.0;    
+        if (currentLoopSound) {
+          currentLoopSound.pause();
+          currentLoopSound.currentTime = 0;
+          currentLoopSound = null;
+        }
       }
 
       terminalSystem();
@@ -345,7 +379,7 @@ input.onkeydown = e => {
       e.preventDefault();
       return;
     }
-    if (audioEnabled) keySounds[0].play();
+    playSound(keySounds[0]);
     e.preventDefault();
     const command = input.value.trim().toLowerCase();
     terminal.textContent += `\n> ${command}\n`;
@@ -354,30 +388,22 @@ input.onkeydown = e => {
     updateCaretPosition();
     handleCommand(command);
   } else if (!['Shift','Control','Alt','Meta','Backspace'].includes(e.key)) {
-    if (audioEnabled) playTypingSound();
+    playTypingSound();
   }
 };
 
 document.querySelector('.crt-terminal').onclick = () => input.focus();
 window.addEventListener('mousedown', () => {
-    if (!audioEnabled) return;
-    const click = terminalSounds[2].cloneNode();
-    click.volume = 0.5;
-    click.playbackRate = 0.95 + Math.random() * 0.1;
-    click.play();
+  playSound(terminalSounds[2], 0.5, 0.95 + Math.random() * 0.1);
 });
 
 window.addEventListener('mouseup', () => {
-    if (!audioEnabled) return;
-    const click = terminalSounds[3].cloneNode();
-    click.volume = 0.5;
-    click.playbackRate = 1 + Math.random() * 0.1;
-    click.play();
+  playSound(terminalSounds[3], 0.5, 1.0 + Math.random() * 0.1);
 });
 
 window.onload = () => {
   loadMessages();
-  startupLoading(200, 5000);
+  startupLoading(200, 3000);
   setTimeout(updateCaretPosition, 100);
   setTimeout(() => input.focus({ preventScroll: true }), 5100);
 };

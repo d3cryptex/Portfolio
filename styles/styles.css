@@ -157,7 +157,6 @@ video, #vhsOverlay, #globeOverlay {
   text-align: center;
 }
 
-/* Сканлайны */
 .crt-screen::after {
   content: "";
   position: absolute;
@@ -167,7 +166,7 @@ video, #vhsOverlay, #globeOverlay {
   z-index: 4;
 }
 
-/* Crt line */
+/* Lines  */
 .crt-line-wrapper {
   position: absolute;
   top: 0;
@@ -178,7 +177,6 @@ video, #vhsOverlay, #globeOverlay {
   overflow: visible;
 }
 
-/* Контейнер для пары линий (след + основная) */
 .crt-line-container {
   position: absolute;
   top: -20px;
@@ -189,7 +187,6 @@ video, #vhsOverlay, #globeOverlay {
   will-change: transform, opacity;
 }
 
-/* Основная линия */
 .crt-line {
   position: absolute;
   width: 100%;
@@ -199,17 +196,14 @@ video, #vhsOverlay, #globeOverlay {
   filter: drop-shadow(0 0 4px rgba(0, 255, 100, 0.8));
 }
 
-/* След - размытие и прозрачность */
 .crt-line.trail {
   background: rgba(0, 255, 100, 0.4);
   filter: blur(28px);
   opacity: 0.3;
   z-index: -1;
-  /* Немного сдвинем по X, чтобы создать эффект хвоста */
   transform: translateX(-15px);
 }
 
-/* Разные уровни прозрачности для контейнеров */
 .crt-line-container:nth-child(1) .crt-line {
   background: rgba(96, 100, 98, 0.3);
   filter: drop-shadow(0 0 4px rgba(0, 255, 100, 0.3));
@@ -237,7 +231,6 @@ video, #vhsOverlay, #globeOverlay {
   background: rgba(0, 255, 100, 0.15);
 }
 
-/* Анимация волны и движения вниз */
 @keyframes waveDown {
   0% {
     top: -20px;
@@ -260,7 +253,7 @@ video, #vhsOverlay, #globeOverlay {
   padding: 5px;
   font-size: 18px;
   overflow: hidden;
-  max-height: 100%; /* или нужная высота */
+  max-height: 100%;
   overflow-y: auto;
   white-space: pre-wrap;
   scrollbar-width: none;
@@ -302,7 +295,7 @@ video, #vhsOverlay, #globeOverlay {
   align-items: center;
   width: 100%;
   height: 100%;
-  max-width: 600px; /* Наприклад */
+  max-width: 600px;
 }
 
 #terminal-input {
@@ -315,8 +308,8 @@ video, #vhsOverlay, #globeOverlay {
   caret-color: transparent;
   position: relative;
   width: 100%;
-  top: 0; /* Додано */
-  left: 0; /* Додано */
+  top: 0;
+  left: 0;
   height: 100%;
   z-index: 2;
 }
@@ -337,6 +330,11 @@ video, #vhsOverlay, #globeOverlay {
   display: block;
 }
 
+#loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 #loading h1 {
   font-size: 26px;
   color: #2f7e4e;
@@ -357,6 +355,16 @@ video, #vhsOverlay, #globeOverlay {
     transform: scale(1.02);
   }
 }
+.discleimer {
+  margin: 20px;
+}
+.discleimer p {
+  font-size: 18px;
+  color: #2f7e4e;
+  text-shadow: 0 0 5px #266652;
+  font-family: "VT323", monospace;
+}
+
 /* draggable window*/
 .crt-window {
   position: absolute;
@@ -416,7 +424,7 @@ video, #vhsOverlay, #globeOverlay {
 
 .window-body {
   padding: 6px;
-  max-height: calc(100vh - 100px); /* учти высоту хедера и отступов */
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding-right: 6px;
 }
@@ -441,7 +449,7 @@ video, #vhsOverlay, #globeOverlay {
 /* Изображения */
 .project-screenshot {
   width: 100%;
-  max-height: 200px; /* ограничим по высоте */
+  max-height: 200px;
   object-fit: contain;
   border: 1px solid #00ff00;
   border-radius: 4px;
