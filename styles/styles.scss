@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+::selection {
+  background: #107e59; 
+  color: #000000;      
+}
+
+::-moz-selection {
+  background: #107e59;
+  color: #000000;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "VT323", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #0f4b27;
+    cursor: url('../assets/img/default.cur'), auto;
+}
+
+.monitor-frame-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#window-screen{
+  display: none;
+}
+
+#screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: auto;
+  width: 96%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.crt-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.02); 
+    }
+}
+
+.content{
+    position: relative;
+    min-width: 98%;
+    min-height: 92%;
+    background-color: black;
+    background-image: radial-gradient(200% 250% at center, rgba(15, 24, 15, 0.575), rgb(0, 0, 0) 100%);
+    background-clip: padding-box;
+    margin: 15px;
+    overflow: hidden; 
+    padding: 2rem;
+    font-size: 24px;
+    z-index: -1;
+}
+
+video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+#vhsOverlay {
+    mix-blend-mode: screen;
+    opacity: 0.3;
+}
+  
+#globeOverlay {
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    opacity: 0.1;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 1;
+}
+
+video, #vhsOverlay, #globeOverlay {
+    z-index: 0;
+}
+
+.crt-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .crt-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .crt-screen {
+    z-index: 3;
+    color: #00FF66;
+    text-shadow: 0 0 2px #00ff66, 0 0 10px #00ff66;
+    text-align: center;
+  }
+  
+  /* Сканлайны */
+  .crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 255, 100, 0.05) 0px,
+      rgba(0, 255, 100, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 4;
+  }
+
+/* Crt line */
+
+.crt-line-wrapper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  
+  /* Контейнер для пары линий (след + основная) */
+  .crt-line-container {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 120%;
+    height: 2px;
+    animation: waveDown 6s linear infinite;
+    will-change: transform, opacity;
+  }
+  
+  /* Основная линия */
+  .crt-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 255, 100, 0.7);
+    border-radius: 1px;
+    filter: drop-shadow(0 0 4px rgba(0, 255, 100, 0.8));
+  }
+  
+  /* След - размытие и прозрачность */
+  .crt-line.trail {
+    background: rgba(0, 255, 100, 0.4);
+    filter: blur(28px);
+    opacity: 0.3;
+    z-index: -1;
+    /* Немного сдвинем по X, чтобы создать эффект хвоста */
+    transform: translateX(-15px);
+  }
+  
+  /* Разные уровни прозрачности для контейнеров */
+  .crt-line-container:nth-child(1) .crt-line {
+    background: rgba(96, 100, 98, 0.3);
+    filter: drop-shadow(0 0 4px rgba(0, 255, 100, 0.3));
+  }
+  .crt-line-container:nth-child(1) .crt-line.trail {
+    background: rgba(0, 255, 100, 0.4);
+  }
+  
+  .crt-line-container:nth-child(2) .crt-line {
+    background: rgba(96, 100, 98, 0.5);
+    filter: drop-shadow(0 0 3px rgba(0, 255, 100, 0.6));
+  }
+  .crt-line-container:nth-child(2) .crt-line.trail {
+    background: rgba(0, 255, 100, 0.25);
+  }
+  
+  .crt-line-container:nth-child(3) .crt-line {
+    background: rgba(96, 100, 98, 0.3);
+    filter: drop-shadow(0 0 2px rgba(0, 255, 100, 0.4));
+  }
+  .crt-line-container:nth-child(3) .crt-line.trail {
+    background: rgba(0, 255, 100, 0.15);
+  }
+  
+  /* Анимация волны и движения вниз */
+  @keyframes waveDown {
+    0% {
+      top: -20px;
+      transform: translateX(0) skewX(0deg);
+      opacity: 0.2;
+    }
+    50% {
+      top: 50%;
+      transform: translateX(20px) skewX(-5deg);
+      opacity: 0.5;
+    }
+    100% {
+      top: 110%;
+      transform: translateX(0) skewX(0deg);
+      opacity: 0.2;
+    }
+  }
+
+/* Terminal */
+.crt-terminal{
+    padding: 5px;   
+    font-size: 18px;
+    overflow: hidden;
+    max-height: 100%; /* или нужная высота */
+    overflow-y: auto;
+    white-space: pre-wrap;
+    scrollbar-width: none;
+}
+
+.cursor::after {
+    content: "█";
+    animation: blink 1s infinite steps(1);
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.terminal-output {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.terminal-input-line {
+    margin-top: 0;
+    display: none;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+.fake-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 600px; /* Наприклад */
+}
+
+#terminal-input {
+    background: transparent;
+    border: none;
+    color: #0f4b27;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    outline: none;
+    caret-color: transparent;
+    position: relative;
+    width: 100%;
+    top: 0; /* Додано */
+    left: 0; /* Додано */
+    height: 100%; 
+    z-index: 2;
+}
+
+#input-caret {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    font-family: 'VT323', monospace;
+    color: #0f4b27;
+    animation: blink 1s steps(1) infinite;
+    pointer-events: none;
+}
+
+/* Loading */
+.loading-container{
+    display: block;
+}
+
+#loading{
+    h1 {
+        font-size: 26px;
+        color: #2f7e4e;
+        text-shadow:
+        0 0 5px #266652;
+        font-family: "VT323", monospace;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.02); 
+    }
+}
+
+/* draggable window*/
+
+.crt-window {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  min-width: 500px;
+  min-height: 500px;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: #0e0f0c;
+  border: 2px solid #0f4b27;
+  font-size: 18px;
+  font-family: 'VT323', monospace;
+  color: #0f4b27;
+  cursor: url('../assets/img/select.cur'), auto;
+  z-index: 1000;
+  resize: none;
+}
+
+.window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #171f14;
+  padding: 5px 10px;
+  border-bottom: 1px solid #0f4b27;
+  user-select: none;
+  cursor: url('../assets/img/move.cur'), auto;
+}
+
+.window-title {
+  font-weight: bold;
+  color: #0f4b27;
+}
+
+.window-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.window-controls button {
+  background: none;
+  border: 1px solid #0f4b27;
+  color: #0f4b27;
+  width: 20px;
+  height: 20px;
+  cursor: url('../assets/img/select.cur'), auto;
+  font-size: 14px;
+  padding: 0;
+}
+
+.window-controls button:hover {
+  background-color: #0f4b27;
+  color: #000;
+}
+
+.window-body {
+  padding: 6px;
+  max-height: calc(100vh - 100px); /* учти высоту хедера и отступов */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.resizer {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  background: repeating-linear-gradient(45deg, #0f0, #0f0 2px, transparent 2px, transparent 4px);
+}
+
+.project-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Изображения */
+.project-screenshot {
+  width: 100%;
+  max-height: 200px; /* ограничим по высоте */
+  object-fit: contain;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+
+}

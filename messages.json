@@ -1,0 +1,144 @@
+{
+    "introLines": [
+        "╔════════════════════════════════╗                         ⢀⣀⣀⡀⠒⠒⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀",
+        "║    Welcome to d3cryptex OS [v1.0.0]        ║                   ⢀⣤⣶⡾⠿⠿⠿⠿⣿⣿⣶⣦⣄⠙⠷⣤⡀⠀⠀⠀⠀",
+        "║    (c) 2025 d3cryptexSoft Industries       ║                ⣠⡾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣿⣷⣄⠘⢿⡄⠀⠀⠀",
+        "║    All code reserved. No warranty.         ║            ⢀⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠐⠂⠠⢄⡀⠈⢿⣿⣧⠈⢿⡄⠀⠀",
+        "╚════════════════════════════════╝         ⢀⠏⠀⠀⠀⢀⠄⣀⣴⣾⠿⠛⠛⠛⠷⣦⡙⢦⠀⢻⣿⡆⠘⡇⠀⠀",
+        "                                                     ⠀⠀⠀⠀⠀ ⡐⢁⣴⡿⠋⢀⠠⣠⠤⠒⠲⡜⣧⢸⠄⢸⣿⡇⠀⡇⠀⠀",
+        "> Initializing portfolio environment...               ⠀⠀⠀⠀⡼⠀⣾⡿⠁⣠⢃⡞⢁⢔⣆⠔⣰⠏⡼⠀⣸⣿⠃⢸⠃⠀⠀",
+        "> Checking system specs...                            ⠀⠀⠀⢰⡇⢸⣿⡇⠀⡇⢸⡇⣇⣀⣠⠔⠫⠊⠀⣰⣿⠏⡠⠃⠀⠀⢀",
+        "> CPU: 1x Creative Mind @ 3.14GHz                     ⠀⠀⠀⢸⡇⠸⣿⣷⠀⢳⡈⢿⣦⣀⣀⣀⣠⣴⣾⠟⠁⠀⠀⠀⠀⢀⡎",
+        "> RAM: 16GB Ideas | 1TB Motivation SSD                ⠀⠀⠀⠘⣷⠀⢻⣿⣧⠀⠙⠢⠌⢉⣛⠛⠋⠉⠀⠀⠀⠀⠀⠀⣠⠎⠀",
+        "> GitHub connection established [OK]                  ⠀⠀⠀⠀⠹⣧⡀⠻⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡾⠃⠀⠀",
+        "> Json packages connected [OK]                        ⠀⠀⠀⠀⠀⠈⠻⣤⡈⠻⢿⣿⣷⣦⣤⣤⣤⣤⣤⣴⡾⠛⠉⠀⠀⠀⠀",
+        "> MySQL database worked [OK]                          ⠀⠀⠀⠀⠀⠀⠀⠈⠙⠶⢤⣈⣉⠛⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀",
+        "> Loading projects, please wait...                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+        "",
+        ">> System Ready.",
+        ">> Type 'help' to view available commands."
+    ],
+
+    "commandsResponse": {
+        "help": [
+        "Available commands:",
+        "> help        - Show this help message",
+        "> clear       - Clear the terminal screen",
+        "> screenfetch - Show info about system",
+        "> about       - Learn more about the creator",
+        "> stack       - Check the current tech stack",
+        "> projects    - View portfolio projects",
+        "> contact     - Get in touch",
+        "> audio       - Allows to turn off or turn on all audios on the site",
+        "Some jokes:",
+        "> ping        - Ping the 'internet' (with a twist)",
+        "> arts        - Show you a cool arts",
+        "> echo        - Repeat what you say (with sass)"
+        ],
+        "about": [
+        "About d3cryptex:",
+        "> I am a passionate fullstack developer dedicated to creating seamless and efficient web applications.",
+        "> Skilled in both frontend and backend technologies, focusing on clean code, performance, and user experience.",
+        "> Experienced with modern frameworks, APIs, databases, and cloud services.",
+        "> Always eager to learn new tools and improve my craft.",
+        "> And i a little bit crazy :)"
+        ],
+        "stack": [
+        "Current Tech Stack:",
+        "> Frontend: HTML, CSS, JavaScript, jQuery, TypeScript, Angular",
+        "> Backend: Node.js, Express, Nest.js, Python, Django, C++",
+        "> Databases: PostgreSQL, MySQL",
+        "> DevOps: Docker, Postman, GitHub Actions",
+        "> Tools: Git, GitLab, Babel, Webpack, Adaptive Design, Figma, Photoshop",
+        "> Always exploring new technologies and best practices."
+        ],
+        "projects": [
+        "Projects:",
+        "> Financial News App   - Angular + Nest.js web application for tracking financial news with responsive UI and server integration. <financial>",
+        "> Artworks Gallery     - A single page Angular application for viewing digital art works in a minimalist interface. <artworks>",
+        "",
+        "Type projects <projectName> to view details."
+        ],
+        "contact": [
+        "Get in touch with d3cryptex:",
+        "Email: danilobocuk@gmail.com",
+        "GitHub: https://github.com/d3cryptex",
+        "Telegram: https://t.me/d3cryptex",
+        "LinkedIn: www.linkedin.com/in/danilo-boichuk"
+        ],
+        "audio": [
+            "> Type audio <off/on> to switch audio."
+        ],
+        "screenfetch": [
+        "    _  _____                            _              ",
+        "    | ||____ |                          | |             ",
+        "  __| |    / /  ___  _ __  _   _  _ __  | |_  ___ __  __",
+        " / _` |    \\ \\ / __|| '__|| | | || '_ \\ | __|/ _ \\ \\ \\ / /",
+        "| (_| |.___/ /| (__ | |   | |_| || |_) || |_|  __/ >  < ",
+        " \\__,_|\\____/  \\___||_|    \\__, || .__/  \\__|\\___|/_/\\_\\ ",
+        "                            __/ || |                    ",
+        "                           |___/ |_|                    ",
+        "",
+        "d3cryptexOS 1.0",
+        "--------------",
+        "Host: Web Terminal",
+        "Kernel: JavaScript 2025",
+        "Uptime: ∞",
+        "Packages: 1337 (npm)",
+        "Shell: d3cryptex@terminal",
+        "Resolution: 1920x1080",
+        "Terminal: VT323",
+        "CPU: Creative Core @ 3.14GHz",
+        "GPU: Imagination Engine",
+        "Memory: 16GB Ideas"
+        ],
+        "projectslist": {
+            "financial": {
+                "title": "Financial News App",
+                "description": "Angular + Nest.js web application for tracking financial news with responsive UI and server integration.",
+                "images": [
+                    "assets/img/finance1.png",
+                    "assets/img/finance2.png",
+                    "assets/img/finance3.png",
+                    "assets/img/finance4.png"
+                ]
+            },
+            "gallery": {
+                "title": "Artworks Gallery",
+                "description": "A single page Angular application for viewing digital art works in a minimalist interface.",
+                "images": [
+                    "assets/img/gallery1.png",
+                    "assets/img/gallery2.png",
+                    "assets/img/gallery3.png",
+                    "assets/img/gallery4.png"
+                ]
+            }
+        },
+        "arts": {
+            "1": [
+            "  (\\_/)",
+            "  ( •_•)",
+            " / >🍪  — Here's a cookie!"
+            ],
+            "2": [
+            "  ┌(▀Ĺ̯▀)┐",
+            "  ╰( ͡° ͜ʖ ͡° )╯",
+            "  Two cool art units."
+            ],
+            "3": [
+            "  (•_•)",
+            "  <)   )╯  Hello!",
+            "  /   \\"
+            ],
+            "4": [
+            "  (•_•)  ( •_•)>⌐■-■  (⌐■_■)",
+            "  Four styles, four moods."
+            ],
+            "5": [
+            "  (ง'̀-'́)ง",
+            "  (ง'̀-'́)ง   You chose 5 art units!",
+            "  (ง'̀-'́)ง"
+            ]
+        }
+    }
+}
