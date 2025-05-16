@@ -7,7 +7,7 @@ This isn’t just a portfolio. It’s a command-line experience that lets you ex
 ---
 
 ## :globe_with_meridians: Live Demo
-:point_right: Click here to open the portfolio
+:point_right: [Click here](https://d3cryptex.vercel.app/) to open the portfolio
 
 ---
 
