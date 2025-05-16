@@ -16,12 +16,15 @@ const windowDragable = document.getElementById("draggable-window");
 const windowHeader = document.getElementById("draggable-header");
 const windowRightside = document.querySelector(".crt-righside");
 const terminalInput = document.querySelector('.terminal-input-line');
+const startButton = document.getElementById("startBtn");
+const container = document.querySelector('.loading-container');
 
 let lineIndex = 0;
 let charIndex = 0;
 
 let audioEnabled = true;
 let isTyping = false;
+let isLoaded = false;
 
 let currentStartupSound = null;
 let currentLoopSound = null;
@@ -53,7 +56,7 @@ const loadMessages = () => {
 // ==========================
 
 const playSound = (sound, volume = 0.5, rate = 1.0) => {
-  if (!audioEnabled) return;
+  if (!audioEnabled || !isLoaded) return; 
   const s = sound.cloneNode();
   s.volume = volume;
   s.playbackRate = rate;
@@ -77,7 +80,7 @@ const updateCaretPosition = () => {
     document.body.removeChild(span);
 };
 
-const typeToTerminal = (msg, target, delay = 20, callback = null) => {
+const typeToTerminal = (msg, target, delay = 15, callback = null) => {
   let i = 0;
   isTyping = true;
 
@@ -327,7 +330,6 @@ const startupLoading = (interval, time) => {
 
   const screen = document.getElementById('window-screen');
   const loading = document.getElementById('loading-text');
-  const container = document.querySelector('.loading-container');
   const symbols = ['▱▱▱','▰▱▱','▰▰▱','▰▰▰','▱▰▰','▱▱▰'];
   let i = 0;
 
@@ -401,9 +403,14 @@ window.addEventListener('mouseup', () => {
   playSound(terminalSounds[3], 0.5, 1.0 + Math.random() * 0.1);
 });
 
+startButton.addEventListener("click", () => {
+  startButton.style.display = "none";
+  container.style.display = "block";
+  startupLoading(200, 3000);
+});
+
 window.onload = () => {
   loadMessages();
-  startupLoading(200, 3000);
   setTimeout(updateCaretPosition, 100);
   setTimeout(() => input.focus({ preventScroll: true }), 5100);
 };
